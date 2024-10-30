@@ -1,6 +1,5 @@
 import { TrendingCard } from "./Trending-card";
 
-
 export const TrendCard = () => {
   const articles = [
     {
@@ -47,5 +46,3 @@ export const TrendCard = () => {
     </section>
   );
 };
-
-

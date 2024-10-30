@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <main>
       <Carousels />
-      {/* <TrendCard /> */}
-      {/* <Blogs /> */}
+      <TrendCard />
+      <Blogs />
     </main>
   );
 }
