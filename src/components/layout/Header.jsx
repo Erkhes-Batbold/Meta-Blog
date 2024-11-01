@@ -16,7 +16,7 @@ export const Header = () => {
           <nav>
             <ul className="flex gap-10 text-[#3B3C4A]">
               <li>
-                <Link className="hover:underline" href={"/"}>
+                <Link className="hover:underline " href={"/"}>
                   Home
                 </Link>
               </li>

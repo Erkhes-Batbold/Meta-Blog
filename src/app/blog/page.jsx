@@ -1,15 +1,13 @@
 import { BlogCard } from "@/components/BlogCard";
 import Link from "next/link";
 
-
 const BlogPage = async ({ searchParams }) => {
   const { q } = searchParams;
-
   let data = null;
 
   if (q) {
     const response = await fetch(
-      "https://next-mock-api.vercel.app/api/posts?size=12&q=" + q
+      `https://next-mock-api.vercel.app/api/posts?size=12&q=${q}`
     );
     data = await response.json();
   } else {
@@ -17,6 +15,10 @@ const BlogPage = async ({ searchParams }) => {
       "https://next-mock-api.vercel.app/api/posts?size=12&page=1"
     );
     data = await response.json();
+  }
+
+  if (!data || !data.items) {
+    return <div>No posts found.</div>; 
   }
 
   return (
@@ -35,19 +37,19 @@ const BlogPage = async ({ searchParams }) => {
         aria-label="Page navigation example"
         className="flex justify-center my-10"
       >
-        <ul class="inline-flex -space-x-px text-sm">
+        <ul className="inline-flex -space-x-px text-sm">
           {Array.from({ length: data.pageInfo.totalPages }).map((_, index) => (
             <li key={index}>
-              <a
-                href="#"
-                class={`flex items-center justify-center px-3 h-8 leading-tight ${
+              <Link
+                href={`?page=${index + 1}&q=${q || ""}`} 
+                className={`flex items-center justify-center px-3 h-8 leading-tight ${
                   index + 1 === data.pageInfo.page
                     ? "text-blue-600 bg-blue-50"
                     : "text-gray-500 bg-white"
-                } border border-gray-300 hover:bg-gray-100 hover:text-gray-700 `}
+                } border border-gray-300 hover:bg-gray-100 hover:text-gray-700`}
               >
                 {index + 1}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

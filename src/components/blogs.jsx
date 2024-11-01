@@ -1,8 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { BlogCard } from "./BlogCard";
 
-
 export const Blogs = async () => {
+  
   const response = await fetch(
     "https://next-mock-api.vercel.app/api/posts?size=9"
   );
@@ -43,6 +45,29 @@ export const Blogs = async () => {
             <BlogCard post={item} />
           </Link>
         ))}
+      </div>
+      <div className="justify-center flex">
+        <nav aria-label="Page navigation example">
+          <ul class="inline-flex -space-x-px text-sm">
+            {Array.from({ length: data.pageInfo.totalPages }, (_, index) => (
+              <li key={index}>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                  className={`flex items-center justify-center px-3 h-8 leading-tight mb-9 ${
+                    index + 1 === data.pageInfo.page
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-gray-500 bg-white"
+                  } border border-gray-300 hover:bg-gray-100 hover:text-gray-700`}
+                >
+                  {index + 1}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </section>
   );
